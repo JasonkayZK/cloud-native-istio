@@ -15,7 +15,7 @@ spec:
   selector:
     app: recommendation
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: recommendation-v1
@@ -36,6 +36,9 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3005
+  selector:
+    matchLabels:
+      app: recommendation
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule

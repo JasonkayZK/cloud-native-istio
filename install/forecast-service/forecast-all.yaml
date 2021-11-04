@@ -15,7 +15,7 @@ spec:
   selector:
     app: forecast
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: forecast-v1
@@ -36,8 +36,11 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3002
+  selector:
+    matchLabels:
+      app: forecast
 ---
-apiVersion: extensions/v1beta1
+apiVersion:  apps/v1
 kind: Deployment
 metadata:
   name: forecast-v2
@@ -57,7 +60,10 @@ spec:
         image: istioweather/forecast:v2
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 3002		
+        - containerPort: 3002
+  selector:
+    matchLabels:
+      app: forecast
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule

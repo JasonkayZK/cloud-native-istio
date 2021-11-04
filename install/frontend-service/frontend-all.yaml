@@ -15,7 +15,7 @@ spec:
   selector:
     app: frontend
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-v1
@@ -36,8 +36,11 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+  selector:
+    matchLabels:
+      app: frontend
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-v2
@@ -57,7 +60,10 @@ spec:
         image: istioweather/frontend:v2
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 3000		
+        - containerPort: 3000
+  selector:
+    matchLabels:
+      app: frontend
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule

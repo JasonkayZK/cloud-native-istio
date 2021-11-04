@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tcp-echo
+  namespace: weather
   labels:
     app: tcp-echo
 spec:
@@ -11,7 +12,7 @@ spec:
   selector:
     app: tcp-echo
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tcp-echo-v1
@@ -30,3 +31,6 @@ spec:
         args: [ "9000", "v1" ]
         ports:
         - containerPort: 9000
+  selector:
+    matchLabels:
+      app: tcp-echo

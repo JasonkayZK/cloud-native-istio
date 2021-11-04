@@ -1,4 +1,4 @@
-apiVersion: flagger.app/v1alpha3
+apiVersion: flagger.app/v1beta1
 kind: Canary
 metadata:
   name: ad
@@ -18,7 +18,7 @@ spec:
     # Istio virtual service host names (optional)
     hosts:
     - ad
-  canaryAnalysis:
+  analysis:
     # schedule interval (default 60s)
     interval: 40s
     # max number of failed metric checks before rollback
@@ -30,7 +30,15 @@ spec:
     # percentage (0-100)
     stepWeight: 20
     metrics:
-    - name: "request error rate"
+#      - name: request-success-rate
+#        thresholdRange:
+#          min: 99
+#        interval: 1m
+#      - name: request-duration
+#        thresholdRange:
+#          max: 500
+#        interval: 1m
+    - name: request-error-rate
       threshold: 5
       query: |
         100 - sum(rate(istio_requests_total{

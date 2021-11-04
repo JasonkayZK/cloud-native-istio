@@ -1,7 +1,8 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-v2
+  namespace: weather
   labels:
     app: frontend
     version: v2
@@ -19,3 +20,6 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+  selector:
+    matchLabels:
+      app: frontend

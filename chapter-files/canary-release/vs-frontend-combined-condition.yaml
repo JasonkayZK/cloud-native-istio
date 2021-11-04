@@ -12,7 +12,7 @@ spec:
   - match:
     - headers:
         User-Agent:
-          regex: .*((Android)).*  
+          regex: .*((Edg)).*
     route:
     - destination:
         host: frontend
